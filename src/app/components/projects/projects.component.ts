@@ -34,13 +34,6 @@ export class ProjectsComponent {
     technologies: ['Angular', 'TypeScript', 'Leaflet Maps', 'Chart.js'],
     icon: '🔋',
     color: '#fff'
-  },
-  {
-    title: 'Circular Economy Analytics Dashboard',
-    description: 'Data-driven dashboard to monitor overall material recovery, recycling trends, and environmental impact metrics. Helps organizations meet compliance and track ESG goals.',
-    technologies: ['Angular', 'Node.js', 'HighCharts', 'D3.js'],
-    icon: '📊',
-    color: '#fff'
   }
 ];
 
