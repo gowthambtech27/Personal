@@ -26,8 +26,7 @@ jobs:
       # 1️⃣ Checkout your repository
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          ref:${{github.event.inputs.commit}}
+  
 
       # 2️⃣ Setup Node.js
       - name: Setup Node.js
