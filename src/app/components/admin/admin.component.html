@@ -1,0 +1,100 @@
+<div class="crud-container">
+  <h2>Experience Management</h2>
+
+  <div *ngIf="statusMessage" class="status-message status-success">
+    {{ statusMessage }}
+  </div>
+
+  <div class="form-card">
+    <h3>{{ isEditMode ? 'Edit Experience' : 'Add New Experience' }}</h3>
+    
+    <form [formGroup]="experienceForm" (ngSubmit)="onSubmit()">
+      
+      <div class="form-group">
+        <label for="title">Job Title</label>
+        <input id="title" type="text" formControlName="title" placeholder="e.g., Software Engineer">
+        <div *ngIf="experienceForm.get('title')?.invalid && experienceForm.get('title')?.touched" class="error-message">Title is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="company">Company</label>
+        <input id="company" type="text" formControlName="company" placeholder="e.g., Karo Sambhav Private Limited">
+        <div *ngIf="experienceForm.get('company')?.invalid && experienceForm.get('company')?.touched" class="error-message">Company is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input id="location" type="text" formControlName="location" placeholder="e.g., Bangalore, KA">
+        <div *ngIf="experienceForm.get('location')?.invalid && experienceForm.get('location')?.touched" class="error-message">Location is required.</div>
+      </div>
+
+      <div class="form-group date-row">
+        <div class="date-col">
+          <label for="startDate">Start Date</label>
+          <input id="startDate" type="date" formControlName="startDate">
+        </div>
+        <div class="date-col">
+          <label for="endDate">End Date / Present</label>
+          <input id="endDate" type="text" formControlName="endDate" placeholder="e.g., 2024-12-31 or Present">
+        </div>
+      </div>
+
+      <div formArrayName="description">
+        <label>Job Description (Bullet Points)</label>
+        <div *ngFor="let control of descriptions.controls; let i = index" class="description-item">
+          <input type="text" [formControlName]="i" placeholder="Enter a key responsibility or achievement">
+          <button type="button" class="btn btn-danger" (click)="removeDescriptionItem(i)" title="Remove bullet">
+            &times;
+          </button>
+        </div>
+        <div class="description-controls">
+          <button type="button" class="btn btn-add" (click)="addDescriptionItem()">
+            + Add Bullet Point
+          </button>
+        </div>
+        <div *ngIf="descriptions.invalid && descriptions.touched" class="error-message">At least one bullet point is required.</div>
+      </div>
+      
+      <hr>
+
+      <button type="submit" class="btn btn-primary" [disabled]="experienceForm.invalid">
+        {{ isEditMode ? 'Save Changes' : 'Create Experience' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">
+        Cancel / Clear Form
+      </button>
+
+    </form>
+  </div>
+
+
+  <h3>Existing Experiences ({{ (experiences$ | async)?.length || 0 }})</h3>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>Title</th>
+        <th>Duration</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exp of experiences$ | async">
+        <td>{{ exp.company }}</td>
+        <td>{{ exp.title }}</td>
+        <td>{{ exp.startDate | date:'mediumDate' }} - {{ exp.endDate === 'Present' ? 'Present' : (exp.endDate | date:'mediumDate') }}</td>
+        <td>
+          <button class="btn btn-primary" style="margin-right: 8px;" (click)="editExperience(exp)">Edit</button>
+          <button class="btn btn-danger" (click)="deleteExperience(exp.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="!(experiences$ | async)?.length">
+      <tr>
+        <td colspan="4" style="text-align: center;">No experience data found.</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
