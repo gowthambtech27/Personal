@@ -9,7 +9,7 @@ export class ProjectsComponent {
  projects = [
   {
     title: 'E-Waste Recycling Platform',
-    description: 'A comprehensive system for managing electronic waste from collection to recycling. Features GPS tracking of collection, real-time monitoring, certificates of recycling, and material recovery reports.',
+    description: 'A comprehensive system for managing electronic waste from collection to recycling.GPS tracking, real-time monitoring, Material Recovery optimization, Regulatory compliance',
     technologies: ['Angular', 'TypeScript', 'REST API', 'Material Design'],
     icon: '♻️',
     color: '#fff'
