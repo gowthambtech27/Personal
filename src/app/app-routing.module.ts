@@ -5,12 +5,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' }, // <-- default route
-  { path: 'login', component: LoginComponent },
+  // { path: '', redirectTo: 'login', pathMatch: 'full' }
+  // , // <-- default route
+  // { path: 'login', component: LoginComponent },
   { 
     path: 'admin', 
     component: AdminComponent,
   },
+  
   { path: '**', redirectTo: 'login' } // catch-all redirect
 ];
 
