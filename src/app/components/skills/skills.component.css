@@ -19,7 +19,8 @@
 }
 
 .skill-icon {
-  font-size: 48px;
+  font-size: 30px;
+  color:rgb(224, 112, 172);
   margin-bottom: 15px;
   display: block;
 }

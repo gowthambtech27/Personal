@@ -20,22 +20,21 @@
 }
 
 .contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: flex;           /* Turn into flex container */
+  flex-wrap: wrap;         /* Allow wrapping if screen is small */
+  gap: 16px;               /* Space between cards */
 }
 
 .info-card {
-  padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  flex: 1 1 240px;         /* Cards grow/shrink, basis width ~240px */
+  padding: 16px;
+  border: 1px solid #ccc;  /* or your design style */
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
 }
+
 
 .info-icon {
   font-size: 24px;
-  margin-bottom: 10px;
 }
 
 .info-card h3 {

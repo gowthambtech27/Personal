@@ -6,22 +6,33 @@
         <app-languages></app-languages>
       </div>
       <div class="contact-info">
-        <div class="info-card">
-          <div class="info-icon">📧</div>
-          <h3>Email</h3>
-          <a [href]="'mailto:' + contactInfo.email">{{ contactInfo.email }}</a>
-        </div>
-        <div class="info-card">
-          <div class="info-icon">📱</div>
-          <h3>Phone</h3>
-          <a [href]="'tel:' + contactInfo.phone">{{ contactInfo.phone }}</a>
-        </div>
-        <div class="info-card">
-          <div class="info-icon">📍</div>
-          <h3>Location</h3>
-          <p>{{ contactInfo.location }}</p>
+        <div class="info-card" *ngFor="let item of contactInfo | keyvalue">
+
+          <div class="info-icon">
+            <i [class]="item.value.icon"></i>
+          </div>
+
+          <!-- Dynamic link handling -->
+          <a *ngIf="item.key === 'email'" [href]="'mailto:' + item.value.value">
+            {{ item.value.value }}
+          </a>
+
+          <a *ngIf="item.key === 'phone'" [href]="'tel:' + item.value.value">
+            {{ item.value.value }}
+          </a>
+
+          <a *ngIf="item.key === 'linkedin'" [href]="item.value.value" target="_blank">
+            {{ item.value.value }}
+          </a>
+
+          <!-- For items that are not links (e.g., location) -->
+          <p *ngIf="item.key === 'location'">
+            {{ item.value.value }}
+          </p>
+
         </div>
       </div>
+
 
     </div>
   </div>

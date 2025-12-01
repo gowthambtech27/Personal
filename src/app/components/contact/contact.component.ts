@@ -8,12 +8,25 @@ import { Component } from '@angular/core';
 export class ContactComponent {
   currentYear = new Date().getFullYear();
   
-  contactInfo = {
-    email: 'gowthampalanichamyy@gmail.com',
-    phone: '+918660464527',
-    location: 'Bangalore, Karnataka, India',
-    linkedin: 'www.linkedin.com/in/gowtham-palanichamy'
-  };
+ contactInfo = {
+  email: {
+    value: 'gowthampalanichamyy@gmail.com',
+    icon: 'fas fa-envelope'
+  },
+  phone: {
+    value: '+918660464527',
+    icon: 'fas fa-phone'
+  },
+  location: {
+    value: 'Bangalore, Karnataka, India',
+    icon: 'fas fa-location-dot'
+  },
+  linkedin: {
+    value: 'www.linkedin.com/in/gowtham-palanichamy',
+    icon: 'fab fa-linkedin'
+  }
+};
+
 
   onSubmit() {
     // Handle form submission

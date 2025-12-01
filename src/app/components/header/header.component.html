@@ -3,13 +3,15 @@
     <div class="nav-brand">
       <a href="#" (click)="scrollToSection('home'); $event.preventDefault()">Portfolio</a>
     </div>
+
     <ul class="nav-menu" [class.active]="isMenuOpen">
-      <li><a href="#about" (click)="scrollToSection('about'); $event.preventDefault()">About</a></li>
-      <li><a href="#experience" (click)="scrollToSection('experience'); $event.preventDefault()">Experience</a></li>
-      <li><a href="#skills" (click)="scrollToSection('skills'); $event.preventDefault()">Skills</a></li>
-      <li><a href="#projects" (click)="scrollToSection('projects'); $event.preventDefault()">Projects</a></li>
-      <li><a href="#languages" (click)="scrollToSection('languages'); $event.preventDefault()">Contact</a></li>
+      <li *ngFor="let section of sections">
+        <a href="#" (click)="scrollToSection(section.id); $event.preventDefault()">
+          {{ section.name }}
+        </a>
+      </li>
     </ul>
+
     <div class="nav-toggle" (click)="toggleMenu()">
       <span></span>
       <span></span>
@@ -25,14 +27,16 @@
         <span class="greeting">Hello, I'm</span>
         <span class="name">Gowtham Palanichamy</span>
       </h1>
-      <p class="hero-subtitle">Front-End Developer | 6+ Years of Experience Creating Scalable & High-Performance Web
-        Applications</p>
+      <p class="hero-subtitle">
+        Front-End Developer | 6+ Years Experience Creating Scalable Web Apps
+      </p>
       <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary" (click)="scrollToSection('projects'); $event.preventDefault()"><i class="fas fa-folder-open"></i>
-View My Work</a>
-        <a href="assets/gowtham_resume.pdf" class="btn btn-primary" target="_blank" rel="noopener"> <i class="fas fa-file-pdf"></i>
-View Resume</a>
-
+        <a href="#projects" class="btn btn-primary" (click)="scrollToSection('projects'); $event.preventDefault()">
+          <i class="fas fa-folder-open"></i> View My Work
+        </a>
+        <a href="assets/gowtham_resume.pdf" class="btn btn-primary" target="_blank" rel="noopener">
+          <i class="fa-solid fa-file"></i> View Resume
+        </a>
       </div>
     </div>
     <div class="hero-image">
@@ -41,8 +45,5 @@ View Resume</a>
       </div>
     </div>
   </div>
-  <div class="scroll-indicator">
-    <span></span>
-  </div>
-
+  <div class="scroll-indicator"><span></span></div>
 </div>

@@ -1,12 +1,14 @@
 <section class="skills section" id="skills">
   <div class="container">
-<h2 class="heading-icon" data-icon="&#xf121;">Skills</h2>
+    <h2 class="heading-icon" data-icon="&#xf121;">Skills</h2>
     <div class="skills-grid">
       <div class="skill-card" *ngFor="let skill of skills">
-        <div class="skill-icon">{{ skill.icon }}</div>
+        <div class="skill-icon">
+          <i [class]="skill.icon"></i>
+        </div>
         <h3 class="skill-name">{{ skill.name }}</h3>
       </div>
+
     </div>
   </div>
 </section>
-

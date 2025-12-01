@@ -2,8 +2,13 @@
   <div class="container">
     <h2 class="heading-icon" data-icon="&#xf005;">Soft Skills</h2>
     <div class="skills-tags">
-      <span class="skill-tag" *ngFor="let skill of softSkills">{{ skill }}</span>
+      <span class="skill-tag" *ngFor="let skill of softSkills">
+        <span class="skill-icon">
+        <i [class]="skill.icon"></i>
+        </span>
+        {{ skill.name }}
+      </span>
     </div>
+
   </div>
 </section>
-

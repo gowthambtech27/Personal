@@ -1,12 +1,13 @@
 <section class="projects section" id="projects">
   <div class="container">
-<h2 class="heading-icon" data-icon="&#xf542;">My Projects</h2>
-    <p class="section-subtitle">Four innovative projects focused on environmental sustainability and waste management</p>
+    <h2 class="heading-icon" data-icon="&#xf542;">My Projects</h2>
+    <p class="section-subtitle">Four innovative projects focused on environmental sustainability and waste management
+    </p>
     <div class="projects-grid">
       <div class="project-card" *ngFor="let project of projects" [style.--project-color]="project.color">
         <div class="project-header">
           <div class="project-icon" [style.background-color]="project.color">
-            <span>{{ project.icon }}</span>
+            <i [ngClass]="project.icon"></i>
           </div>
           <h3 class="project-title">{{ project.title }}</h3>
         </div>
@@ -14,9 +15,8 @@
         <div class="project-technologies">
           <span class="tech-tag" *ngFor="let tech of project.technologies">{{ tech }}</span>
         </div>
-      
+
       </div>
     </div>
   </div>
 </section>
-

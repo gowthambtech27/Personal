@@ -98,5 +98,6 @@ button:hover,
   top: 39%;
   transform: translateY(-50%);
   font-size: 20px;
-  color: #3cf8ff;
+  /* color: #3cf8ff; */
+  color:rgb(210, 28, 125);
 }
