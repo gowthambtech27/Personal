@@ -78,7 +78,11 @@
   color: #fff;
   font-size: 14px;
 }
-
+ .chart-container {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 10px;
+  }
 @media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;

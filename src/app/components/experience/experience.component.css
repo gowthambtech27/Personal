@@ -24,7 +24,7 @@
 }
 
 .timeline-item {
-  /* margin-bottom: 30px; */ 
+  /* margin-bottom: 30px; */
   padding-left: 15px;
 }
 
@@ -105,8 +105,16 @@
 }
 
 .focus-icon {
-  font-size: 24px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 2rem;
+  color: deeppink;
   margin-bottom: 10px;
+  animation: bounce 1s infinite;
 }
 
 .focus-item h4 {

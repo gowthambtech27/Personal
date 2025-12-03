@@ -15,6 +15,9 @@
         <div class="project-technologies">
           <span class="tech-tag" *ngFor="let tech of project.technologies">{{ tech }}</span>
         </div>
+        <div class="chart-container">
+          <canvas id="{{project.title}}-chart"></canvas>
+        </div>
 
       </div>
     </div>
