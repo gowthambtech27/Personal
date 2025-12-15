@@ -13,6 +13,8 @@ interface Section {
 export class HeaderComponent implements OnInit {
   isScrolled = false;
   isMenuOpen = false;
+  isDarkTheme = true;
+
 
   // Dynamic sections (can replace with Firebase later)
   sections: Section[] = [
@@ -24,7 +26,7 @@ export class HeaderComponent implements OnInit {
     { id: 'contact', name: 'Contact' },
   ];
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   // Detect scroll to add scrolled class
   @HostListener('window:scroll', [])
@@ -45,4 +47,22 @@ export class HeaderComponent implements OnInit {
       this.isMenuOpen = false; // Close mobile menu after click
     }
   }
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+
+    document.body.classList.toggle('light-theme', !this.isDarkTheme);
+  }
+  openResume(event: Event) {
+    event.preventDefault();
+    const resumeWindow = window.open(
+      'assets/gowtham_resume.pdf',
+      '_blank'
+    );
+
+    // Close after 7 seconds
+    setTimeout(() => {
+      resumeWindow?.close();
+    }, 7000);
+  }
+
 }

@@ -11,6 +11,10 @@
         </a>
       </li>
     </ul>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" (click)="toggleTheme()" aria-label="Toggle theme">
+      <i class="fas" [ngClass]="isDarkTheme ? 'fa-sun' : 'fa-moon'"></i>
+    </button>
   </nav>
 </header>
 
@@ -28,10 +32,12 @@
         <a href="#projects" class="btn btn-primary" (click)="scrollToSection('projects'); $event.preventDefault()">
           <i class="fas fa-folder-open"></i> View My Work
         </a>
-        <a href="assets/gowtham_resume.pdf" class="btn btn-primary" target="_blank" rel="noopener">
+        <a href="#" class="btn btn-primary" (click)="openResume($event)">
           <i class="fa-solid fa-file"></i> View Resume
         </a>
+
       </div>
+
     </div>
     <div class="hero-image">
       <div class="hero-avatar">

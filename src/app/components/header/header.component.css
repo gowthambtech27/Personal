@@ -129,3 +129,23 @@ i {
     margin: 5px 0;
   }
 }
+.header .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Theme Button */
+.theme-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #ffffff;
+  margin-left: 20px;
+}
+
+/* Light Theme Button Color */
+body.light-theme .theme-toggle {
+  color: #202124;
+}
