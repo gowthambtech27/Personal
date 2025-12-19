@@ -50,7 +50,7 @@ export class ProjectsComponent implements AfterViewInit {
       description: 'A versatile platform promoting safe disposal and recycling of various products. Locate collection points, access educational resources on sustainability, and streamline compliance reporting for businesses and individuals.',
       technologies: ['Sass', 'Html', 'Css', 'JavaScript'],
       icon: 'fa-solid fa-recycle',
-      color: '#28A745',
+      color: '#a76c28ff',
       chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
       chartData: [0, 0, 0, 0, 0, 0, 0, 2]
     }
@@ -58,33 +58,53 @@ export class ProjectsComponent implements AfterViewInit {
   ];
 
   ngAfterViewInit(): void {
-    Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+  Chart.register(
+    BarController,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    Tooltip,
+    Legend
+  );
 
-    setTimeout(() => {
-      this.projects.forEach(project => {
-        const ctx = document.getElementById(`${project.title}-chart`) as HTMLCanvasElement;
-        if (ctx) {
-          new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: project.chartLabels,
-              datasets: [{
-                label: 'Months Worked',
-                data: project.chartData,
-                backgroundColor: project.color
-              }]
-            },
-            options: {
-              responsive: true,
-              plugins: { legend: { display: false }, tooltip: { enabled: true } },
-              scales: {
-                y: { beginAtZero: true, title: { display: true, text: 'Months' }, type: 'linear' },
-                x: { title: { display: true, text: 'Year' }, type: 'category' }
-              }
+  setTimeout(() => {
+    const ctx = document.getElementById('all-projects-chart') as HTMLCanvasElement;
+    if (!ctx) return;
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: this.projects[0].chartLabels, // same labels for all (years/months)
+        datasets: this.projects.map(project => ({
+          label: project.title,
+          data: project.chartData,
+          backgroundColor: project.color
+        }))
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: true },
+          tooltip: { enabled: true }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Months'
             }
-          });
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Year'
+            }
+          }
         }
-      });
-    }, 0);
-  }
+      }
+    });
+  }, 0);
+}
+
 }
