@@ -1,128 +1,21 @@
-/* Simple Contact Section */
-.contact {
-  background: transparent;
-}
-
-.section-subtitle {
-  text-align: center;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 30px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-}
-
-.contact-info {
-  display: flex;           /* Turn into flex container */
-  flex-wrap: wrap;         /* Allow wrapping if screen is small */
-  gap: 16px;               /* Space between cards */
-}
-
 .info-card {
-  flex: 1 1 240px;         /* Cards grow/shrink, basis width ~240px */
+  display: flex;            /* Make card a flex container */
+  align-items: center;      /* Vertically center icon and text */
+  gap: 12px;                /* Space between icon and text */
   padding: 16px;
-  border: 1px solid #ccc;  /* or your design style */
+  border: 1px solid #ccc;
   border-radius: 8px;
 }
 
-
 .info-icon {
   font-size: 24px;
-}
-
-.info-card h3 {
-  font-size: 14px;
-  color: #fff;
-  margin-bottom: 5px;
-  font-weight: normal;
+  flex-shrink: 0;           /* Prevent icon from shrinking */
+  color: #28A745;           /* Optional: green icon */
 }
 
 .info-card a,
 .info-card p {
   color: rgba(255, 255, 255, 0.9);
   font-size: 14px;
-}
-
-.contact-form-wrapper {
-  padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  font-size: 14px;
-  font-family: 'Inter', sans-serif;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.btn-submit {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.btn-submit:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.footer {
-  background: transparent;
-  color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 20px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  margin-top: 40px;
-}
-
-.footer-text {
-  margin-top: 5px;
-  font-size: 12px;
-}
-
-@media (max-width: 768px) {
-  .contact-content {
-    grid-template-columns: 1fr;
-  }
+  margin: 0;                /* Remove default margin */
 }

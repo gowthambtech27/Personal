@@ -1,8 +1,11 @@
 <header [class.scrolled]="isScrolled" class="header">
   <nav class="nav container">
-    <div class="nav-brand">
-      <a href="#" (click)="scrollToSection('home'); $event.preventDefault()">Portfolio</a>
-    </div>
+ <div class="nav-brand">
+  <a href="#" (click)="scrollToSection('home'); $event.preventDefault()">
+    <img style="background-color: transparent;" src="assets/favicon.svg" alt="logo" class="brand-icon">
+  </a>
+</div>
+
 
     <ul class="nav-menu" [class.active]="isMenuOpen">
       <li *ngFor="let section of sections">
@@ -11,39 +14,45 @@
         </a>
       </li>
     </ul>
-    <!-- Theme Toggle Button -->
+
     <button class="theme-toggle" (click)="toggleTheme()" aria-label="Toggle theme">
       <i class="fas" [ngClass]="isDarkTheme ? 'fa-sun' : 'fa-moon'"></i>
     </button>
   </nav>
 </header>
 
-<div class="hero" id="home">
-  <div class="hero-content">
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <span class="shape shape1"></span>
+    <span class="shape shape2"></span>
+    <span class="shape shape3"></span>
+  </div>
+
+  <div class="hero-content container">
     <div class="hero-text">
       <h1 class="hero-title">
-        <span class="greeting">Hello, I'm</span>
+        <span class="greeting">Hi, I'm</span>
         <span class="name">Gowtham Palanichamy</span>
       </h1>
       <p class="hero-subtitle">
-        Front-End Developer | 6+ Years Experience Creating Scalable Web Apps
+        Front-End Developer | 6+ Years Experience Building Scalable Web Apps
       </p>
       <div class="hero-buttons">
         <a href="#projects" class="btn btn-primary" (click)="scrollToSection('projects'); $event.preventDefault()">
-          <i class="fas fa-folder-open"></i> View My Work
+          <i class="fas fa-folder-open"></i> My Work
         </a>
-        <a href="#" class="btn btn-primary" (click)="openResume($event)">
-          <i class="fa-solid fa-file"></i> View Resume
+        <a href="#" class="btn btn-secondary" (click)="openResume($event)">
+          <i class="fas fa-file"></i> Resume
         </a>
-
       </div>
-
     </div>
+
     <div class="hero-image">
       <div class="hero-avatar">
-        <div class="avatar-circle"></div>
+        <img src="assets/images/profile.jpg" alt="Gowtham Palanichamy">
       </div>
     </div>
   </div>
+
   <div class="scroll-indicator"><span></span></div>
-</div>
+</section>

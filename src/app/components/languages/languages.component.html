@@ -1,13 +1,16 @@
 <section class="languages section" id="languages">
-  <div class="container">
-    <h2 class="section-title">Languages</h2>
+  <!-- <div class="container"> -->
+    <!-- <h2 class="section-title">Languages</h2> -->
     <div class="languages-grid">
       <div class="language-card" *ngFor="let language of languages">
-        <div class="language-icon">{{ language.icon }}</div>
-        <h3 class="language-name">{{ language.name }}</h3>
-        <p class="language-level">{{ language.level }}</p>
+        <div class="language-icon">
+          <i [class]="language.icon"></i>
+        </div>
+        <div class="language-info">
+          <h3 class="language-name">{{ language.name }}</h3>
+          <p class="language-level">{{ language.level }}</p>
+        </div>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </section>
-

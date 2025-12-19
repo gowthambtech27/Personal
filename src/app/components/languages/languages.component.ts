@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
 export class LanguagesComponent {
   languages = [
     { name: 'English', level: 'Professional', icon: '🇬🇧' },
-    { name: 'Kannada', level: 'Basic - Learning', icon: '🇮🇳' },
-    { name: 'Tamil', level: 'Native', icon: '🇮🇳' }
+    { name: 'Tamil', level: 'Native', icon: '🇮🇳' },
+    { name: 'Kannada', level: 'Basic - Learning', icon: '🇮🇳' }
   ];
 }
 

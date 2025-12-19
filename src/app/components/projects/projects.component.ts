@@ -7,7 +7,7 @@ import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip, 
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements AfterViewInit {
-  
+
   projects = [
     {
       title: 'E-Waste Recycling Platform',
@@ -15,8 +15,8 @@ export class ProjectsComponent implements AfterViewInit {
       technologies: ['Angular', 'TypeScript', 'REST API', 'Material Design'],
       icon: 'fa-solid fa-recycle',
       color: '#FF5733',
-      chartLabels: ['2018','2019','2020','2021','2022','2023','2024','2025'],
-    chartData: [3, 12, 3, 1, 0, 0, 0, 0]
+      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      chartData: [3, 12, 3, 1, 0, 0, 0, 0]
     },
     {
       title: 'Plastic Waste Management System',
@@ -24,8 +24,8 @@ export class ProjectsComponent implements AfterViewInit {
       technologies: ['Angular', 'Node.js', 'HighCharts', 'Chart.js'],
       icon: 'fa-solid fa-trash-can',
       color: '#33C3FF',
-      chartLabels: ['2018','2019','2020','2021','2022','2023','2024','2025'],
-    chartData: [0, 0, 9, 5, 0, 0, 0, 0]
+      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      chartData: [0, 0, 9, 5, 0, 0, 0, 0]
     },
     {
       title: 'Glass Waste Collection Tracker',
@@ -33,8 +33,8 @@ export class ProjectsComponent implements AfterViewInit {
       technologies: ['Angular', 'TypeScript', 'REST API', 'Material Design'],
       icon: 'fa-solid fa-wine-bottle',
       color: '#28A745',
-      chartLabels: ['2018','2019','2020','2021','2022','2023','2024','2025'],
-    chartData: [0, 0, 0, 6, 12, 3, 0, 0]
+      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      chartData: [0, 0, 0, 6, 12, 3, 0, 0]
     },
     {
       title: 'Battery Waste Disposal & Awareness',
@@ -42,9 +42,19 @@ export class ProjectsComponent implements AfterViewInit {
       technologies: ['Angular', 'TypeScript', 'Leaflet Maps', 'Chart.js'],
       icon: 'fa-solid fa-battery-full',
       color: '#FFC300',
-      chartLabels: ['2018','2019','2020','2021','2022','2023','2024','2025'],
-    chartData: [0, 0, 0, 0, 0, 9, 12, 6]
+      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      chartData: [0, 0, 0, 0, 0, 9, 12, 6]
+    },
+    {
+      title: 'Circularity Solutions',
+      description: 'A versatile platform promoting safe disposal and recycling of various products. Locate collection points, access educational resources on sustainability, and streamline compliance reporting for businesses and individuals.',
+      technologies: ['Sass', 'Html', 'Css', 'JavaScript'],
+      icon: 'fa-solid fa-recycle',
+      color: '#28A745',
+      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      chartData: [0, 0, 0, 0, 0, 0, 0, 2]
     }
+
   ];
 
   ngAfterViewInit(): void {
