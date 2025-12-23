@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 
 interface Section {
   id: string;
@@ -10,7 +10,7 @@ interface Section {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
   isScrolled = false;
   isMenuOpen = false;
   isDarkTheme = true;
@@ -27,7 +27,9 @@ export class HeaderComponent implements OnInit {
   ];
 
   ngOnInit(): void { }
-
+  ngAfterViewInit() {
+    this.initParticles();
+  }
   // Detect scroll to add scrolled class
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -64,5 +66,84 @@ export class HeaderComponent implements OnInit {
       resumeWindow?.close();
     }, 7000);
   }
+  private initParticles() {
+    const canvas: any = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles: any[] = [];
+
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5
+      });
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let p of particles) {
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx = -p.dx;
+        if (p.y < 0 || p.y > canvas.height) p.dy = -p.dy;
+
+        ctx.beginPath();
+        this.drawStar(ctx, p.x, p.y, 5, p.radius * 3, p.radius * 1.2);
+
+        ctx.shadowBlur = 18;
+        ctx.fillStyle = '#FFCDA5';
+        ctx.fill();
+
+      }
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+  private drawStar(
+    ctx: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    points: number,
+    outerRadius: number,
+    innerRadius: number
+  ) {
+    const step = Math.PI / points;
+    let rotation = Math.PI / 2 * 3;
+
+    ctx.moveTo(x, y - outerRadius);
+
+    for (let i = 0; i < points; i++) {
+      ctx.lineTo(
+        x + Math.cos(rotation) * outerRadius,
+        y + Math.sin(rotation) * outerRadius
+      );
+      rotation += step;
+
+      ctx.lineTo(
+        x + Math.cos(rotation) * innerRadius,
+        y + Math.sin(rotation) * innerRadius
+      );
+      rotation += step;
+    }
+
+    ctx.lineTo(x, y - outerRadius);
+    ctx.closePath();
+  }
+
 
 }
