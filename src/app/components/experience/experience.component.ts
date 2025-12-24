@@ -6,22 +6,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./experience.component.css']
 })
 export class ExperienceComponent {
-  experience = {
+  experiences = {
     years: 6,
     company: 'Karo Sambhav Private Limited',
     location: 'Bangalore, KA',
-    position: 'Senior Front-End Developer', 
+    position: 'Front-End Developer', 
     period: 'Oct 2018 – Present',
     description: 'A key contributor specializing in architecting and deploying scalable, high-performance Angular applications for environmental sustainability and compliance tracking.',
-    achievements: [
-      'Spearheaded development for 4 concurrent E-Waste and Plastic Waste Management platforms using Angular (v14+), NgRx, and TypeScript.',
-      'Optimized application performance through strategic implementation of lazy loading and caching, resulting in a **20% average reduction in initial load time**.',
-      'Engineered sophisticated data visualization modules (HighCharts/Chart.js) to deliver real-time reports and insights for stakeholders.',
-      'Collaborated with Back-End teams to define and securely consume **RESTful APIs** while integrating **JWT Authentication**.',
-      'Implemented robust **Unit Testing** (Jasmine/Karma) and code review standards, reducing critical production bugs by **15%**.',
-      'Managed project timelines and deliverables for all 4 projects within Agile/Scrum methodologies, consistently exceeding quality expectations.',
-      'Ensured all web applications were fully **mobile-first responsive** and maintained high compatibility across different browsers and devices (HTML5, SCSS, Bootstrap).'
-    ]
+  achievements: [
+  'Lead the development of <b>4 high-impact Angular (v14+)</b> applications, utilizing <b>NgRx</b> and <b>TypeScript</b> to deliver scalable solutions for multiple concurrent projects.',
+  'Enhanced application performance through strategic <b>lazy loading</b> and caching, achieving a <b>20% faster initial load time</b>, improving overall user experience.',
+  'Designed and implemented advanced data visualization modules using <b>HighCharts</b> and <b>Chart.js</b> to provide actionable real-time insights for stakeholders.',
+  'Collaborated effectively with Back-End teams to integrate secure <b>RESTful APIs</b> and implement <b>JWT Authentication</b>, ensuring robust and secure data management.',
+  'Established and maintained rigorous <b>Unit Testing</b> practices (Jasmine/Karma) and code reviews, reducing critical production issues by <b>15%</b>.',
+  'Managed project timelines and deliverables within <b>Agile/Scrum</b> frameworks, consistently achieving milestones ahead of schedule and exceeding quality standards.',
+  'Delivered fully responsive, cross-browser compatible web applications using <b>HTML5</b>, <b>SCSS</b>, <b>Bootstrap</b>, enhancing accessibility and usability across devices.'
+]
+
+
 };
 }
 

@@ -19,3 +19,35 @@
   font-size: 14px;
   margin: 0;                /* Remove default margin */
 }
+
+.footer {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px 0;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer a {
+  color: rgb(224, 112, 172);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  color: #fff;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.last-visit b {
+  color: rgb(224, 112, 172); /* Highlight bold text */
+}
