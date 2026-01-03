@@ -5,37 +5,40 @@
       <div class="contact-form-wrapper">
         <app-languages></app-languages>
       </div>
-   <div class="contact-info">
-  <div class="info-card" *ngFor="let item of contactInfo | keyvalue">
-    
-    <div class="info-icon">
-      <i [class]="item.value.icon"></i>
-    </div>
+      <div class="contact-info">
+        <div class="info-card" *ngFor="let item of contactInfo">
 
-    <div class="info-content">
-      <!-- Email -->
-      <a *ngIf="item.key === 'email'" [href]="'mailto:' + item.value.value">
-        {{ item.value.value }}
-      </a>
+          <div class="info-icon">
+            <i [class]="item.icon" aria-hidden="true"></i>
+          </div>
 
-      <!-- Phone -->
-      <a *ngIf="item.key === 'phone'" [href]="'tel:' + item.value.value">
-        {{ item.value.value }}
-      </a>
+          <div class="info-content">
 
-      <!-- LinkedIn or other URLs -->
-      <a *ngIf="item.key === 'linkedin'" [href]="item.value.value" target="_blank" rel="noopener noreferrer">
-        {{ item.value.value }}
-      </a>
+            <!-- Email -->
+            <a *ngIf="item.type === 'email'" [href]="'mailto:' + item.value">
+              {{ item.value }}
+            </a>
 
-      <!-- Plain text (e.g., location) -->
-      <p *ngIf="item.key === 'location'">
-        {{ item.value.value }}
-      </p>
-    </div>
+            <!-- Phone -->
+            <a *ngIf="item.type === 'phone'" [href]="'tel:' + item.value">
+              {{ item.display || item.value }}
+            </a>
 
-  </div>
-</div>
+            <!-- External Links (LinkedIn, GitHub, etc.) -->
+            <a *ngIf="item.type === 'link'" [href]="item.value" target="_blank" rel="noopener noreferrer">
+              {{ item.label }}
+            </a>
+
+            <!-- Location / Text -->
+            <p *ngIf="item.type === 'text'">
+              {{ item.value }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
 
 
 
@@ -45,10 +48,8 @@
 
 <footer class="footer">
   <div class="container">
-<p>&copy; {{ currentYear }} <a href="https://gowthambtech27.github.io/Personal/" target="_blank" rel="noopener noreferrer">Gowtham Palanichamy</a>. All rights reserved.</p>
-<p class="footer-text" *ngIf="lastVisit">
-  Your last visit was: <b>{{ lastVisit | date:'medium' }}</b>
-</p>
+    <p>&copy; {{ currentYear }} <a href="https://gowthambtech27.github.io/Personal/" target="_blank"
+        rel="noopener noreferrer">Gowtham Palanichamy</a>. All rights reserved.</p>
 
   </div>
 </footer>

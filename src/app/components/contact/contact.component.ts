@@ -1,48 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+interface ContactItem {
+  type: 'email' | 'phone' | 'link' | 'text';
+  value: string;
+  icon: string;
+  label?: string;
+  display?: string;
+}
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent {
+
   currentYear = new Date().getFullYear();
 
-  contactInfo = {
-    email: {
+  contactInfo: ContactItem[] = [
+    {
+      type: 'email',
       value: 'gowthampalanichamyy@gmail.com',
       icon: 'fas fa-envelope'
     },
-    phone: {
+    {
+      type: 'phone',
       value: '+918660464527',
+      display: '+91 86604 64527',
       icon: 'fas fa-phone'
     },
-    location: {
+    {
+      type: 'text',
       value: 'Bangalore, Karnataka, India',
       icon: 'fas fa-location-dot'
     },
-    linkedin: {
-      value: 'www.linkedin.com/in/gowtham-palanichamy',
+    {
+      type: 'link',
+      value: 'https://www.linkedin.com/in/gowtham-palanichamy',
+      label: 'LinkedIn Profile',
       icon: 'fab fa-linkedin'
     }
-  };
-  lastVisit: Date | null = null;
+  ];
 
-  ngOnInit(): void {
-    // Get last visit from localStorage
-    const lastVisitStored = localStorage.getItem('lastVisit');
-    if (lastVisitStored) {
-      this.lastVisit = new Date(lastVisitStored);
-    }
-
-    // Save current visit
-    localStorage.setItem('lastVisit', new Date().toISOString());
-  }
-
-
-  onSubmit() {
-    // Handle form submission
-    alert('Thank you for your message! I will get back to you soon.');
-  }
 }
-
