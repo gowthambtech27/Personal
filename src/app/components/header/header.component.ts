@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   openResume(event: Event) {
     event.preventDefault();
     const resumeWindow = window.open(
-      'assets/gowtham_resume.pdf',
+      'assets/gowtham_recent.pdf',
       '_blank'
     );
 
