@@ -15,7 +15,7 @@ export class ProjectsComponent implements AfterViewInit {
       technologies: ['Angular', 'TypeScript', 'REST API', 'Material Design'],
       icon: 'fa-solid fa-recycle',
       color: '#FF5733',
-      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025','2026'],
       chartData: [3, 12, 3, 1, 0, 0, 0, 0]
     },
     {
@@ -24,7 +24,7 @@ export class ProjectsComponent implements AfterViewInit {
       technologies: ['Angular', 'Node.js', 'HighCharts', 'Chart.js'],
       icon: 'fa-solid fa-trash-can',
       color: '#33C3FF',
-      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025','2026'],
       chartData: [0, 0, 9, 5, 0, 0, 0, 0]
     },
     {
@@ -33,7 +33,7 @@ export class ProjectsComponent implements AfterViewInit {
       technologies: ['Angular', 'TypeScript', 'REST API', 'Material Design'],
       icon: 'fa-solid fa-wine-bottle',
       color: '#28A745',
-      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025','2026'],
       chartData: [0, 0, 0, 6, 12, 3, 0, 0]
     },
     {
@@ -42,7 +42,7 @@ export class ProjectsComponent implements AfterViewInit {
       technologies: ['Angular', 'TypeScript', 'Leaflet Maps', 'Chart.js'],
       icon: 'fa-solid fa-battery-full',
       color: '#FFC300',
-      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025','2026'],
       chartData: [0, 0, 0, 0, 0, 9, 12, 6]
     },
     {
@@ -51,60 +51,69 @@ export class ProjectsComponent implements AfterViewInit {
       technologies: ['Sass', 'Html', 'Css', 'JavaScript'],
       icon: 'fa-solid fa-recycle',
       color: '#a76c28ff',
-      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'],
       chartData: [0, 0, 0, 0, 0, 0, 0, 2]
+    },
+    {
+      title: 'Compliance Dashboard',
+      description: 'Comprehensive compliance monitoring platform for e-waste management. Tracks regulatory adherence, manages documentation, provides real-time analytics, and ensures seamless reporting aligned with environmental guidelines.',
+      technologies: ['Angular', 'TypeScript', 'Leaflet Maps', 'Chart.js'],
+      icon: 'fa-solid fa-chart-line',
+      color: '#28A723',
+      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+      chartData: [0, 0, 0, 0, 0, 0, 0, 0,6]
     }
 
   ];
 
   ngAfterViewInit(): void {
-  Chart.register(
-    BarController,
-    BarElement,
-    CategoryScale,
-    LinearScale,
-    Tooltip,
-    Legend
-  );
+    Chart.register(
+      BarController,
+      BarElement,
+      CategoryScale,
+      LinearScale,
+      Tooltip,
+      Legend
+    );
 
-  setTimeout(() => {
-    const ctx = document.getElementById('all-projects-chart') as HTMLCanvasElement;
-    if (!ctx) return;
+    setTimeout(() => {
+      const ctx = document.getElementById('all-projects-chart') as HTMLCanvasElement;
+      if (!ctx) return;
 
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: this.projects[0].chartLabels, // same labels for all (years/months)
-        datasets: this.projects.map(project => ({
-          label: project.title,
-          data: project.chartData,
-          backgroundColor: project.color
-        }))
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: true },
-          tooltip: { enabled: true }
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: this.projects[0].chartLabels, // same labels for all (years/months)
+          datasets: this.projects.map(project => ({
+            label: project.title,
+            data: project.chartData,
+            backgroundColor: project.color
+          }))
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Months'
-            }
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: true },
+            tooltip: { enabled: true }
           },
-          x: {
-            title: {
-              display: true,
-              text: 'Year'
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Months'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Year'
+              }
             }
           }
         }
-      }
-    });
-  }, 0);
-}
+      });
+    }, 0);
+  }
 
 }
