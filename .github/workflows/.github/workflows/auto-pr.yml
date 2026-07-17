@@ -1,0 +1,34 @@
+name: Auto Create Pull Request
+
+on:
+  push:
+    branches:
+      - PRTEST
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: auto-pr-from-prtest
+          delete-branch: true
+
+          title: "Merge PRTEST into main"
+
+          body: |
+            ## Automatic Pull Request
+
+            Source Branch: PRTEST
+            Target Branch: main
