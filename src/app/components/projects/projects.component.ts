@@ -54,6 +54,7 @@ export class ProjectsComponent implements AfterViewInit {
       chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
       chartData: [0, 0, 0, 0, 0, 0, 0, 2]
     },
+    
     {
       title: 'Compliance Management System',
       description: 'A web-based compliance management platform that enables organizations to track regulatory requirements, manage audits, maintain compliance documents, monitor corrective actions, generate reports, and ensure adherence to industry and government regulations through real-time dashboards and automated workflows.',
