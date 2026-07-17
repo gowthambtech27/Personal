@@ -53,15 +53,6 @@ export class ProjectsComponent implements AfterViewInit {
       color: '#a76c28ff',
       chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'],
       chartData: [0, 0, 0, 0, 0, 0, 0, 2]
-    },
-    {
-      title: 'Compliance Dashboard',
-      description: 'Comprehensive compliance monitoring platform for e-waste management. Tracks regulatory adherence, manages documentation, provides real-time analytics, and ensures seamless reporting aligned with environmental guidelines.',
-      technologies: ['Angular', 'TypeScript', 'Leaflet Maps', 'Chart.js'],
-      icon: 'fa-solid fa-chart-line',
-      color: '#333366',
-      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'],
-      chartData: [0, 0, 0, 0, 0, 0, 0, 0,4]
     }
 
   ];
