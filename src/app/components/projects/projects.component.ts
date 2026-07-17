@@ -53,58 +53,67 @@ export class ProjectsComponent implements AfterViewInit {
       color: '#a76c28ff',
       chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
       chartData: [0, 0, 0, 0, 0, 0, 0, 2]
+    },
+    {
+      title: 'Compliance Management System',
+      description: 'A web-based compliance management platform that enables organizations to track regulatory requirements, manage audits, maintain compliance documents, monitor corrective actions, generate reports, and ensure adherence to industry and government regulations through real-time dashboards and automated workflows.',
+      technologies: ['Angular', 'TypeScript', 'HTML', 'SCSS', 'Bootstrap', 'REST API'],
+      icon: 'fa-solid fa-shield-halved',
+      color: '#2563eb',
+      chartLabels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      chartData: [0, 0, 0, 0, 0, 0, 1, 2]
     }
 
   ];
 
   ngAfterViewInit(): void {
-  Chart.register(
-    BarController,
-    BarElement,
-    CategoryScale,
-    LinearScale,
-    Tooltip,
-    Legend
-  );
+    Chart.register(
+      BarController,
+      BarElement,
+      CategoryScale,
+      LinearScale,
+      Tooltip,
+      Legend
+    );
 
-  setTimeout(() => {
-    const ctx = document.getElementById('all-projects-chart') as HTMLCanvasElement;
-    if (!ctx) return;
+    setTimeout(() => {
+      const ctx = document.getElementById('all-projects-chart') as HTMLCanvasElement;
+      if (!ctx) return;
 
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: this.projects[0].chartLabels, // same labels for all (years/months)
-        datasets: this.projects.map(project => ({
-          label: project.title,
-          data: project.chartData,
-          backgroundColor: project.color
-        }))
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: true },
-          tooltip: { enabled: true }
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: this.projects[0].chartLabels, // same labels for all (years/months)
+          datasets: this.projects.map(project => ({
+            label: project.title,
+            data: project.chartData,
+            backgroundColor: project.color
+          }))
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Months'
-            }
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: true },
+            tooltip: { enabled: true }
           },
-          x: {
-            title: {
-              display: true,
-              text: 'Year'
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Months'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Year'
+              }
             }
           }
         }
-      }
-    });
-  }, 0);
-}
+      });
+    }, 0);
+  }
 
 }
