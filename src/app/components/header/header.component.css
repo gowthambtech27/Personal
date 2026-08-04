@@ -189,3 +189,36 @@ body.light-theme .theme-toggle {
   width: 300%;
   height: 300%;
 }
+.qr-container{
+    display:flex;
+    gap:30px;
+    justify-content:center;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.qr-card{
+    width:200px;
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    transition:.3s;
+}
+
+.qr-card:hover{
+    transform:translateY(-6px);
+}
+
+.qr-card h5{
+    margin-top:12px;
+}
+
+.qr-card p{
+    color:#666;
+    font-size:14px;
+}
+.qr-box {
+  border-radius: 200px;
+}

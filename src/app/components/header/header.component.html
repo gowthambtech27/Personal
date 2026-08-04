@@ -1,11 +1,10 @@
 <header [class.scrolled]="isScrolled" class="header">
   <nav class="nav container">
- <div class="nav-brand">
-  <a href="#" (click)="scrollToSection('home'); $event.preventDefault()">
-    <img style="background-color: transparent;" src="assets/favicon.svg" alt="logo" class="brand-icon">
-  </a>
-</div>
-
+    <div class="nav-brand">
+      <a href="#" (click)="scrollToSection('home'); $event.preventDefault()">
+        <img src="assets/favicon.svg" alt="logo" class="brand-icon">
+      </a>
+    </div>
 
     <ul class="nav-menu" [class.active]="isMenuOpen">
       <li *ngFor="let section of sections">
@@ -22,25 +21,38 @@
 </header>
 
 <section class="hero" id="home">
-    <!-- <canvas id="heroCanvas" class="hero-bg"></canvas> -->
 
- 
+  <!-- QR Code -->
+  <div class="hero-qr" style="position: absolute; top: 70px; right: 20px; text-align: right;;">
+        <p style="font-size: 10px; margin-top: 5px;">Scan to save my contact</p>
+
+  <qrcode
+    [qrdata]="vCard"
+    [width]="120"
+    [errorCorrectionLevel]="'H'">
+  </qrcode>
+  </div>
 
   <div class="hero-content container">
+
     <div class="hero-text">
       <h1 class="hero-title">
         <span class="greeting">Hi, I'm</span>
         <span class="name">Gowtham Palanichamy</span>
       </h1>
+
       <p class="hero-subtitle">
-        Front-End Developer | 6+ Years Experience Building Scalable Web Apps
-      </p>
+Software Engineer | 7+ Years of Experience | Angular • TypeScript • RxJS • Enterprise Web Applications      </p>
+
       <div class="hero-buttons">
         <a href="#projects" class="btn btn-primary" (click)="scrollToSection('projects'); $event.preventDefault()">
-          <i class="fas fa-folder-open"></i> My Work
+          <i class="fas fa-folder-open"></i>
+          My Work
         </a>
+
         <a href="#" class="btn btn-secondary" (click)="openResume($event)">
-          <i class="fas fa-file"></i> Resume
+          <i class="fas fa-file-pdf"></i>
+          Resume
         </a>
       </div>
     </div>
@@ -50,7 +62,11 @@
         <img src="assets/images/profile.jpg" alt="Gowtham Palanichamy">
       </div>
     </div>
+
   </div>
 
-  <div class="scroll-indicator"><span></span></div>
+  <div class="scroll-indicator">
+    <span></span>
+  </div>
+
 </section>

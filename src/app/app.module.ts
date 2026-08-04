@@ -24,6 +24,7 @@ import { LanguagesComponent } from './components/languages/languages.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AdminComponent } from './components/admin/admin.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    QRCodeModule,
     // 3. Initialize Firebase
     // NOTE: Use .initializeApp() with your config
     AngularFireModule.initializeApp(environment.firebaseConfig),

@@ -14,7 +14,13 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   isScrolled = false;
   isMenuOpen = false;
   isDarkTheme = true;
-
+  vCard = `
+FN:Gowtham Palanichamy
+ORG:Software Engineer
+TITLE:Angular Developer
+TEL:+91 8660464527
+EMAIL:gowthampalanichamyy@gmail.com
+URL:https://gowthambtech27.github.io/Personal/`;
 
   // Dynamic sections (can replace with Firebase later)
   sections: Section[] = [
@@ -26,7 +32,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     { id: 'contact', name: 'Contact' },
   ];
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+  }
   ngAfterViewInit() {
     this.initParticles();
   }
@@ -57,7 +65,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   openResume(event: Event) {
     event.preventDefault();
     const resumeWindow = window.open(
-      'assets/gowtham_recent.pdf',
+      'assets/Gowtham_Palanichamy.docx',
       '_blank'
     );
 
