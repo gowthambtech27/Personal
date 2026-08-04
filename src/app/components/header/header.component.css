@@ -222,6 +222,8 @@ body.light-theme .theme-toggle {
 .qr-box {
   border-radius: 200px;
 }
+
+
 /* Hide QR Code on mobile */
 @media (max-width: 768px) {
   .hero-qr {
