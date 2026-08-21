@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gowthambtech27.github.io/Personal/sitemap.xml

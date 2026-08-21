@@ -1,71 +1,194 @@
+<!-- ========================= -->
+<!-- Header / Navigation -->
+<!-- ========================= -->
+
 <header [class.scrolled]="isScrolled" class="header">
-  <nav class="nav container">
+  <nav class="nav container" aria-label="Main navigation">
+
     <div class="nav-brand">
-      <a href="#" (click)="scrollToSection('home'); $event.preventDefault()">
-        <img src="assets/favicon.svg" alt="logo" class="brand-icon">
+      <a
+        href="#home"
+        aria-label="Gowtham Palanichamy - Home"
+        (click)="scrollToSection('home'); $event.preventDefault()"
+      >
+        <img
+          src="assets/favicon.svg"
+          alt="Gowtham Palanichamy logo"
+          class="brand-icon"
+        >
       </a>
     </div>
 
     <ul class="nav-menu" [class.active]="isMenuOpen">
       <li *ngFor="let section of sections">
-        <a href="#" (click)="scrollToSection(section.id); $event.preventDefault()">
+        <a
+          [href]="'#' + section.id"
+          [attr.aria-label]="section.name"
+          (click)="scrollToSection(section.id); $event.preventDefault()"
+        >
           {{ section.name }}
         </a>
       </li>
     </ul>
 
-    <button class="theme-toggle" (click)="toggleTheme()" aria-label="Toggle theme">
-      <i class="fas" [ngClass]="isDarkTheme ? 'fa-sun' : 'fa-moon'"></i>
+    <button
+      type="button"
+      class="theme-toggle"
+      (click)="toggleTheme()"
+      [attr.aria-label]="isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'"
+    >
+      <i
+        class="fas"
+        [ngClass]="isDarkTheme ? 'fa-sun' : 'fa-moon'"
+        aria-hidden="true"
+      ></i>
     </button>
+
   </nav>
 </header>
 
-<section class="hero" id="home">
+
+<!-- ========================= -->
+<!-- Hero Section -->
+<!-- ========================= -->
+
+<section
+  class="hero"
+  id="home"
+  aria-labelledby="hero-title"
+>
 
   <!-- QR Code -->
-  <div class="hero-qr" style="position: absolute; top: 70px; right: 20px; text-align: right;;">
-        <p style="font-size: 10px; margin-top: 5px;">Scan to save my contact</p>
+  <div
+    class="hero-qr"
+    style="position: absolute; top: 70px; right: 20px; text-align: right;"
+  >
 
-  <qrcode
-    [qrdata]="vCard"
-    [width]="120"
-    [errorCorrectionLevel]="'H'">
-  </qrcode>
+    <p style="font-size: 10px; margin-top: 5px;">
+      Scan to save my contact
+    </p>
+
+    <qrcode
+      [qrdata]="vCard"
+      [width]="120"
+      [errorCorrectionLevel]="'H'"
+    ></qrcode>
+
   </div>
+
 
   <div class="hero-content container">
 
+    <!-- Hero Content -->
     <div class="hero-text">
-      <h1 class="hero-title">
-        <span class="greeting">Hi, I'm</span>
-        <span class="name">Gowtham Palanichamy</span>
+
+      <h1 class="hero-title" id="hero-title">
+
+        <span class="greeting">
+          Hi, I'm
+        </span>
+
+        <span class="name">
+          Gowtham Palanichamy
+        </span>
+
       </h1>
 
-      <p class="hero-subtitle">
-Software Engineer | 7+ Years of Experience | Angular • TypeScript • RxJS • Enterprise Web Applications      </p>
 
+      <!-- Primary Professional Identity -->
+      <h2 class="hero-subtitle">
+        Senior Software Engineer &amp; Angular Developer
+      </h2>
+
+
+      <!-- SEO-friendly Professional Summary -->
+      <p class="hero-description">
+        Angular Developer and Senior Software Engineer with 7+ years of
+        experience building scalable enterprise web applications using
+        Angular, TypeScript, JavaScript, RxJS, NgRx, HTML5, CSS3 and REST APIs.
+      </p>
+
+
+      <!-- Technology Keywords -->
+      <p class="hero-technologies">
+        Angular
+        <span aria-hidden="true">•</span>
+        TypeScript
+        <span aria-hidden="true">•</span>
+        JavaScript
+        <span aria-hidden="true">•</span>
+        RxJS
+        <span aria-hidden="true">•</span>
+        NgRx
+        <span aria-hidden="true">•</span>
+        REST APIs
+        <span aria-hidden="true">•</span>
+        Enterprise Web Applications
+      </p>
+
+
+      <!-- CTA Buttons -->
       <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary" (click)="scrollToSection('projects'); $event.preventDefault()">
-          <i class="fas fa-folder-open"></i>
+
+        <a
+          href="#projects"
+          class="btn btn-primary"
+          aria-label="View Gowtham Palanichamy's Angular projects"
+          (click)="scrollToSection('projects'); $event.preventDefault()"
+        >
+          <i
+            class="fas fa-folder-open"
+            aria-hidden="true"
+          ></i>
+
           My Work
         </a>
 
-        <a href="#" class="btn btn-secondary" (click)="openResume($event)">
-          <i class="fas fa-file-pdf"></i>
+
+        <a
+          href="#"
+          class="btn btn-secondary"
+          aria-label="View Gowtham Palanichamy's resume"
+          (click)="openResume($event)"
+        >
+          <i
+            class="fas fa-file-pdf"
+            aria-hidden="true"
+          ></i>
+
           Resume
         </a>
+
       </div>
+
     </div>
 
+
+    <!-- Profile Image -->
     <div class="hero-image">
+
       <div class="hero-avatar">
-        <img src="assets/images/profile.jpg" alt="Gowtham Palanichamy">
+
+        <img
+          src="assets/images/profile.jpg"
+          alt="Gowtham Palanichamy - Senior Software Engineer and Angular Developer"
+          width="400"
+          height="400"
+          fetchpriority="high"
+        >
+
       </div>
+
     </div>
 
   </div>
 
-  <div class="scroll-indicator">
+
+  <!-- Scroll Indicator -->
+  <div
+    class="scroll-indicator"
+    aria-hidden="true"
+  >
     <span></span>
   </div>
 
