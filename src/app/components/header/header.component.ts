@@ -65,7 +65,7 @@ URL:https://gowthambtech27.github.io/Personal/`;
   openResume(event: Event) {
     event.preventDefault();
     const resumeWindow = window.open(
-      'assets/Gowtham_Palanichamy.docx',
+      'assets/Gowtham_P.pdf',
       '_blank'
     );
 
