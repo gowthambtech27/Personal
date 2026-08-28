@@ -25,6 +25,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { AiAssistantComponent } from './components/ai-assistant/ai-assistant.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     SoftSkillsComponent,
     LanguagesComponent,
     ContactComponent,
-    AdminComponent
+    AdminComponent,
+    AiAssistantComponent
   ],
   imports: [
     BrowserModule,

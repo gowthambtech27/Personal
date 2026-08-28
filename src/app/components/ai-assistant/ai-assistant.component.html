@@ -1,0 +1,149 @@
+<!-- Chat Launcher -->
+<button
+  class="chat-launcher"
+  (click)="toggleChat()"
+  aria-label="Open chat"
+  type="button"
+>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#1A1025"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path
+      d="M21 11.5a8.38 8.38 0 0 1-.9 3.8
+         8.5 8.5 0 0 1-7.6 4.7
+         8.38 8.38 0 0 1-3.8-.9
+         L3 21l1.9-5.7
+         a8.38 8.38 0 0 1-.9-3.8
+         8.5 8.5 0 0 1 4.7-7.6
+         8.38 8.38 0 0 1 3.8-.9h.5
+         a8.48 8.48 0 0 1 8 8v.5z"
+    />
+  </svg>
+</button>
+
+
+<!-- Chat Window -->
+<div
+  class="chat-window"
+  [class.open]="isOpen"
+>
+
+  <!-- Header -->
+  <div class="chat-header">
+
+    <div>
+      <div class="title">
+        Portfolio Assistant
+      </div>
+    </div>
+
+    <button
+      class="chat-close"
+      (click)="toggleChat()"
+      aria-label="Close chat"
+      type="button"
+    >
+      ×
+    </button>
+
+  </div>
+
+
+  <!-- Quick Tags -->
+  <div class="chat-tags">
+
+    <button
+      *ngFor="let key of sectionKeys"
+      class="tag-chip"
+      [title]="kb[key].label"
+      (click)="handleSend(kb[key].label)"
+      type="button"
+    >
+      #{{ key }}
+    </button>
+
+  </div>
+
+
+  <!-- Chat Messages -->
+  <div
+    class="chat-messages"
+    #scrollAnchor
+  >
+
+    <div
+      class="msg"
+      [ngClass]="m.sender"
+      *ngFor="let m of messages"
+    >
+
+      <span
+        class="prompt"
+        *ngIf="m.sender === 'bot'"
+      >
+ 🤖 Assistant      </span>
+
+      <span class="message-text">
+        {{ m.text }}
+      </span>
+
+    </div>
+
+    <!-- Important: bottom scroll target -->
+    <div
+      #bottomAnchor
+      class="bottom-anchor"
+    ></div>
+
+  </div>
+
+
+  <!-- Input -->
+  <div class="chat-input-row">
+
+    <input
+      class="chat-input"
+      type="text"
+      placeholder="Ask about my projects, skills..."
+      autocomplete="off"
+      [(ngModel)]="draft"
+      (keydown.enter)="handleSend(draft)"
+    />
+
+    <button
+      class="chat-send"
+      (click)="handleSend(draft)"
+      aria-label="Send"
+      type="button"
+    >
+
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#1A1025"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line
+          x1="22"
+          y1="2"
+          x2="11"
+          y2="13"
+        />
+
+        <polygon
+          points="22 2 15 22 11 13 2 9 22 2"
+        />
+      </svg>
+
+    </button>
+
+  </div>
+
+</div>

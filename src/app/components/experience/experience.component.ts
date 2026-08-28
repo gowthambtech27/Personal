@@ -10,7 +10,7 @@ experiences = {
   years: 6,
   company: 'Karo Sambhav Private Limited',
   location: 'Bangalore, KA',
-  position: 'Senior Front-End Developer',
+  position: 'Senior Software Engineer',
   period: 'Oct 2018 – Present',
   description:
     'Results-driven Front-End Developer with extensive experience in architecting, optimizing, and delivering scalable enterprise-grade Angular applications for sustainability, compliance management, and digital transformation initiatives. Proven expertise in building high-performance, secure, and user-centric web platforms with a strong focus on scalability, maintainability, and seamless user experience.',
