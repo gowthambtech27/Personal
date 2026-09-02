@@ -7,31 +7,41 @@ import { Component } from '@angular/core';
 })
 export class ExperienceComponent {
 experiences = {
-  years: 6,
+  years: 7,
   company: 'Karo Sambhav Private Limited',
-  location: 'Bangalore, KA',
+  location: 'Bangalore, Karnataka',
   position: 'Senior Software Engineer',
   period: 'Oct 2018 – Present',
+
   description:
-    'Results-driven Front-End Developer with extensive experience in architecting, optimizing, and delivering scalable enterprise-grade Angular applications for sustainability, compliance management, and digital transformation initiatives. Proven expertise in building high-performance, secure, and user-centric web platforms with a strong focus on scalability, maintainability, and seamless user experience.',
+    'Senior Software Engineer and Front-End Developer with 7+ years of experience designing, developing, and optimizing scalable enterprise-grade web applications using Angular, TypeScript, JavaScript, RxJS, and NgRx. Experienced in building high-performance applications for sustainability, compliance management, recycling, and digital transformation platforms, with a strong focus on application architecture, performance optimization, reusable components, data visualization, security, and maintainable code.',
 
   achievements: [
-    'Spearheaded the design and development of <b>4 enterprise-scale Angular (v14+)</b> applications, leveraging <b>TypeScript</b>, <b>RxJS</b>, and <b>NgRx</b> to deliver highly scalable and maintainable solutions across multiple business-critical projects.',
-    
-    'Boosted application performance by implementing <b>lazy loading</b>, code optimization, and intelligent caching strategies, improving <b>initial load time by 20%</b> and enhancing overall system responsiveness.',
+    'Architected and developed <b>4 enterprise-scale Angular applications</b> using <b>Angular v14+</b>, <b>TypeScript</b>, <b>RxJS</b>, and <b>NgRx</b>, delivering scalable, modular, and maintainable solutions for business-critical platforms.',
 
-    'Engineered dynamic <b>real-time data visualization dashboards</b> using <b>HighCharts</b> and <b>Chart.js</b>, enabling stakeholders to make data-driven decisions through actionable business insights.',
+    'Improved application performance by implementing <b>lazy loading</b>, optimized change detection, code splitting, reusable components, and caching strategies, achieving up to <b>20% improvement in initial application load time</b>.',
 
-    'Collaborated cross-functionally with Back-End teams to integrate secure <b>REST APIs</b>, implement <b>JWT-based Authentication</b>, and ensure reliable, scalable, and secure data communication.',
+    'Designed and developed <b>real-time data visualization dashboards</b> using <b>Highcharts</b> and <b>Chart.js</b>, transforming complex business data into actionable insights for operational and management teams.',
 
-    'Established robust <b>unit testing</b> and quality assurance standards using <b>Jasmine</b> and <b>Karma</b>, reducing production defects by <b>15%</b> and improving release stability.',
+    'Integrated and consumed secure <b>RESTful APIs</b> and collaborated closely with Back-End teams to implement reliable data flows, <b>JWT-based authentication</b>, authorization, error handling, and secure client-server communication.',
 
-    'Mentored junior developers and coordinated deliverables within <b>Agile/Scrum</b> environments, successfully driving sprint execution, improving team productivity, and ensuring timely project delivery.',
+    'Developed reusable and configurable <b>Angular components, services, directives, pipes, and shared modules</b>, reducing code duplication and improving application maintainability across multiple projects.',
 
-    'Developed <b>responsive, cross-browser compatible, and accessibility-focused</b> web applications using <b>HTML5</b>, <b>SCSS</b>, and <b>Bootstrap</b>, delivering consistent user experiences across devices and platforms.',
+    'Implemented comprehensive <b>unit testing</b> using <b>Jasmine</b> and <b>Karma</b>, strengthening application reliability and contributing to a <b>15% reduction in production defects</b>.',
 
-    'Acted as a key contributor in application architecture decisions, code reviews, performance tuning, and reusable component development to improve code quality and long-term maintainability.'
+    'Led <b>code reviews, technical discussions, debugging, performance optimization, and application architecture decisions</b>, ensuring adherence to coding standards, scalability, and long-term maintainability.',
+
+    'Mentored junior developers and supported team members through technical guidance, knowledge sharing, code reviews, and best practices within <b>Agile/Scrum</b> development environments.',
+
+    'Built <b>responsive, cross-browser compatible, and accessibility-focused</b> user interfaces using <b>HTML5</b>, <b>SCSS</b>, <b>Bootstrap</b>, JavaScript, and TypeScript, ensuring consistent experiences across desktop, tablet, and mobile devices.',
+
+    'Collaborated with Product, Back-End, QA, and Business teams throughout the <b>SDLC</b>, from requirement analysis and technical design through development, testing, deployment, and production support.',
+
+    'Contributed to enterprise applications focused on <b>e-waste management, battery recycling, compliance management, producer awareness, collection, recycler verification, and sustainability workflows</b>.',
+
+    'Worked extensively with <b>Git-based version control</b>, branching strategies, pull requests, code reviews, and collaborative development practices to maintain high-quality and production-ready releases.'
   ]
 };
+
 }
 
