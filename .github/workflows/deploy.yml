@@ -29,35 +29,31 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'   # match your Angular version (see note above)
+          node-version: '20'
           cache: npm
 
       - name: Install dependencies
-        run: npm ci || npm ci --legacy-peer-deps
+        run: npm ci
 
       - name: Build Angular App
         shell: bash
         env:
           REPO_NAME: ${{ github.event.repository.name }}
-          NODE_OPTIONS: --max_old_space_size=4096
           NO_COLOR: "1"
         run: |
-          set -o pipefail
+          set +e
           echo "Node: $(node --version) | npm: $(npm --version)"
 
           npm run build -- --configuration=production --base-href "/${REPO_NAME}/" 2>&1 | tee angular-build.log
-          STATUS=$?
+          STATUS=${PIPESTATUS[0]}
 
           if [ "$STATUS" -ne 0 ]; then
             echo "===== Key Error Lines ====="
-            grep -nE "ERROR|Error:|TS[0-9]+|NG[0-9]+|budget|heap|not supported|Cannot find" angular-build.log | head -30
-            FIRST_ERROR=$(grep -m1 -E "ERROR|Error:|TS[0-9]+|NG[0-9]+|budget|heap|not supported" angular-build.log)
-            echo "::error title=Angular build failed::${FIRST_ERROR:-See angular-build.log}"
+            grep -nE "ERROR|Error:|TS[0-9]+|NG[0-9]+|budget|heap|not supported" angular-build.log | head -30
           fi
           exit "$STATUS"
 
       - name: Detect dist folder
-        id: detect-dist
         run: |
           INDEX=$(find dist -name index.html -print -quit)
           if [ -z "$INDEX" ]; then
@@ -67,7 +63,6 @@ jobs:
           fi
           DIST_PATH=$(dirname "$INDEX")
           echo "DIST_PATH=$DIST_PATH" >> "$GITHUB_ENV"
-          echo "Detected output path: $DIST_PATH"
           cp "$DIST_PATH/index.html" "$DIST_PATH/404.html"
 
       - name: Upload build files
