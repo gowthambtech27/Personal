@@ -1,3 +1,30 @@
+name: Deploy Angular App
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20   # match your local Node version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build Angular App
         id: angular-build
         shell: bash
@@ -25,7 +52,6 @@
             echo "===== Key Error Lines ====="
             grep -nE "ERROR|Error:|TS[0-9]+|NG[0-9]+|budget|heap|Cannot find|not found" angular-build.log | head -30
 
-            # Surface the first error as an annotation on the run summary
             FIRST_ERROR=$(grep -m1 -E "ERROR|Error:|TS[0-9]+|NG[0-9]+|budget|heap" angular-build.log)
             echo "::error title=Angular build failed::${FIRST_ERROR:-See angular-build.log artifact}"
           fi
