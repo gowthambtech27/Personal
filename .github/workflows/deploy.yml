@@ -1,3 +1,4 @@
+
 name: Deploy Angular Portfolio to GitHub Pages
 
 on:
@@ -6,56 +7,95 @@ on:
       - main
   workflow_dispatch:
 
-
 permissions:
   contents: read
   pages: write
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout your repository
+      # 1. Checkout repository
       - name: Checkout Repository
         uses: actions/checkout@v5
-  
 
-      # 2️⃣ Setup Node.js
+      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
           node-version: '22'
+          cache: npm
 
-      # 3️⃣ Install and Build Angular App
-      - name: Install and Build Angular App
+      # 3. Check project configuration
+      - name: Check Angular Configuration
         run: |
-          npm ci
-          npm run build -- --configuration=production --base-href /${{ github.event.repository.name }}/
+          node --version
+          npm --version
+          test -f package.json
+          test -f package-lock.json
+          test -f angular.json
+          echo "Project configuration files found."
 
-      # 4️⃣ Detect Angular dist path (fixed quoting)
-      - name: Detect Angular dist path
+      # 4. Install dependencies
+      - name: Install Dependencies
+        run: npm ci
+
+      # 5. Build Angular application
+      - name: Build Angular App
+        run: |
+          npm run build -- --configuration=production --base-href "/${{ github.event.repository.name }}/"
+
+      # 6. Detect and validate Angular output
+      - name: Detect Angular Build Output
         id: detect-dist
+        shell: bash
         run: |
-          DIST_PATH=$(node -e "const a=require('./angular.json');console.log(a.projects[Object.keys(a.projects)[0]].architect.build.options.outputPath)")
-          echo "DIST_PATH=$DIST_PATH" >> $GITHUB_ENV
-          echo "Detected output path: $DIST_PATH"
+          DIST_PATH=$(node -e "
+            const a = require('./angular.json');
+            const name = a.defaultProject || Object.keys(a.projects)[0];
+            const project = a.projects[name];
+            const build = project.architect?.build || project.targets?.build;
+            if (!build || !build.options.outputPath) {
+              throw new Error('Angular build outputPath not found');
+            }
+            const output = build.options.outputPath;
+            console.log(typeof output === 'string' ? output : output.base);
+          ")
 
-      # 5️⃣ Upload build folder
-      - name: Upload build files
+          echo "Configured output path: $DIST_PATH"
+
+          if [ -f "$DIST_PATH/browser/index.html" ]; then
+            DIST_PATH="$DIST_PATH/browser"
+          elif [ -f "$DIST_PATH/index.html" ]; then
+            :
+          else
+            echo "ERROR: Angular index.html was not found."
+            echo "Available index.html files:"
+            find dist -maxdepth 5 -type f -name index.html || true
+            exit 1
+          fi
+
+          echo "DIST_PATH=$DIST_PATH" >> "$GITHUB_ENV"
+          echo "Verified deployment directory: $DIST_PATH"
+          ls -la "$DIST_PATH"
+
+      # 7. Upload build files
+      - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: ${{ env.DIST_PATH }}
 
-      # 6️⃣ Deploy to GitHub Pages
+      # 8. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
