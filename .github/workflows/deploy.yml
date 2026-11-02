@@ -6,7 +6,6 @@ on:
       - main
   workflow_dispatch:
 
-
 permissions:
   contents: read
   pages: write
@@ -21,41 +20,70 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
-      # 1️⃣ Checkout your repository
       - name: Checkout Repository
         uses: actions/checkout@v4
-  
 
-      # 2️⃣ Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: '20'   # match your Angular version (see note above)
+          cache: npm
 
-      # 3️⃣ Install and Build Angular App
-      - name: Install and Build Angular App
+      - name: Install dependencies
+        run: npm ci || npm ci --legacy-peer-deps
+
+      - name: Build Angular App
+        shell: bash
+        env:
+          REPO_NAME: ${{ github.event.repository.name }}
+          NODE_OPTIONS: --max_old_space_size=4096
+          NO_COLOR: "1"
         run: |
-          npm ci
-          npm run build -- --configuration=production --base-href /${{ github.event.repository.name }}/
+          set -o pipefail
+          echo "Node: $(node --version) | npm: $(npm --version)"
 
-      # 4️⃣ Detect Angular dist path (fixed quoting)
-      - name: Detect Angular dist path
+          npm run build -- --configuration=production --base-href "/${REPO_NAME}/" 2>&1 | tee angular-build.log
+          STATUS=$?
+
+          if [ "$STATUS" -ne 0 ]; then
+            echo "===== Key Error Lines ====="
+            grep -nE "ERROR|Error:|TS[0-9]+|NG[0-9]+|budget|heap|not supported|Cannot find" angular-build.log | head -30
+            FIRST_ERROR=$(grep -m1 -E "ERROR|Error:|TS[0-9]+|NG[0-9]+|budget|heap|not supported" angular-build.log)
+            echo "::error title=Angular build failed::${FIRST_ERROR:-See angular-build.log}"
+          fi
+          exit "$STATUS"
+
+      - name: Detect dist folder
         id: detect-dist
         run: |
-          DIST_PATH=$(node -e "const a=require('./angular.json');console.log(a.projects[Object.keys(a.projects)[0]].architect.build.options.outputPath)")
-          echo "DIST_PATH=$DIST_PATH" >> $GITHUB_ENV
+          INDEX=$(find dist -name index.html -print -quit)
+          if [ -z "$INDEX" ]; then
+            echo "::error::No index.html found under dist/"
+            ls -R dist || true
+            exit 1
+          fi
+          DIST_PATH=$(dirname "$INDEX")
+          echo "DIST_PATH=$DIST_PATH" >> "$GITHUB_ENV"
           echo "Detected output path: $DIST_PATH"
+          cp "$DIST_PATH/index.html" "$DIST_PATH/404.html"
 
-      # 5️⃣ Upload build folder
       - name: Upload build files
         uses: actions/upload-pages-artifact@v3
         with:
           path: ${{ env.DIST_PATH }}
 
-      # 6️⃣ Deploy to GitHub Pages
+      - name: Upload Angular build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular-build-log
+          path: angular-build.log
+          retention-days: 7
+          if-no-files-found: ignore
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
