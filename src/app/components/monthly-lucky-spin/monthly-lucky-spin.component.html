@@ -1,0 +1,297 @@
+<div class="lucky-container" id="spin">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="header-icon">🎡</div>
+      <div>
+        <h2>Monthly Winner Wheel</h2>
+        <p>Your monthly contribution. Your chance to win!</p>
+      </div>
+    </div>
+
+    <button class="admin-btn" (click)="toggleAdmin()">
+      <span>⚙️</span>
+      {{ isAdmin ? 'Close Admin' : 'Admin Dashboard' }}
+    </button>
+  </div>
+
+  <!-- ADMIN LOGIN -->
+  <div class="admin-panel" *ngIf="showAdminLogin && !isAdmin">
+    <div class="section-heading">
+      <h3>🔐 Admin Login</h3>
+      <p>Enter your administrator password to manage the spin.</p>
+    </div>
+
+    <div class="admin-login">
+      <input
+        type="password"
+        [(ngModel)]="adminPassword"
+        placeholder="Enter admin password">
+
+      <button (click)="loginAdmin()">Login</button>
+    </div>
+
+    <p class="error" *ngIf="loginError">{{ loginError }}</p>
+  </div>
+
+  <!-- ADMIN SETTINGS -->
+  <div class="admin-panel" *ngIf="isAdmin">
+
+    <div class="section-heading">
+      <h3>⚙️ Admin Control Panel</h3>
+      <p>Manage monthly settings and authorized spinner.</p>
+    </div>
+
+    <div class="settings-grid">
+
+      <div class="form-group">
+        <label>📅 Select Month</label>
+        <input
+          type="month"
+          [(ngModel)]="selectedMonth"
+          (ngModelChange)="onMonthChange()">
+      </div>
+
+      <div class="form-group">
+        <label>💰 Contribution Per Member</label>
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="contribution">
+      </div>
+
+      <div class="form-group">
+        <label>🎯 Authorized Spinner</label>
+        <select [(ngModel)]="authorizedSpinner">
+          <option value="">Select user</option>
+          <option *ngFor="let user of users" [value]="user">
+            {{ user }}
+          </option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="admin-members">
+      <h4>👥 Manage Members</h4>
+
+      <div class="user-edit" *ngFor="let user of users; let i = index">
+        <span class="member-number">{{ i + 1 }}</span>
+        <input
+          [(ngModel)]="users[i]"
+          [placeholder]="'User ' + (i + 1)">
+      </div>
+    </div>
+
+    <div class="admin-actions">
+      <button class="save-btn" (click)="saveSettings()">
+        💾 Save Settings
+      </button>
+
+      <button class="logout-btn" (click)="logoutAdmin()">
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <!-- MONTHLY SUMMARY -->
+  <!-- <div class="summary-grid">
+
+    <div class="summary-card members-card">
+      <div class="summary-icon">👥</div>
+      <div>
+        <span>Total Members</span>
+        <h2>{{ users.length }}</h2>
+        <small>Active participants</small>
+      </div>
+    </div>
+
+    <div class="summary-card contribution-card">
+      <div class="summary-icon">💰</div>
+      <div>
+        <span>Contribution / Member</span>
+        <h2>₹{{ contribution | number }}</h2>
+        <small>Monthly contribution</small>
+      </div>
+    </div>
+
+    <div class="summary-card collection-card">
+      <div class="summary-icon">🏆</div>
+      <div>
+        <span>Total Monthly Collection</span>
+        <h2>₹{{ totalCollection | number }}</h2>
+        <small>Combined member contribution</small>
+      </div>
+    </div>
+
+  </div> -->
+
+  <!-- SPIN AREA -->
+  <div class="spin-dashboard">
+
+    <div class="spin-heading">
+      <span class="spin-badge">✨ MONTHLY EVENT</span>
+      <h2>Who's the Lucky Winner?</h2>
+      <p>
+        All seven members have an equal chance to win.
+        Good luck!
+      </p>
+    </div>
+
+    <div class="month-display">
+      📅 {{ selectedMonth }}
+    </div>
+
+    <!-- MEMBER LIST -->
+    <div class="member-list">
+      <div class="member-chip"
+        *ngFor="let user of users; let i = index">
+        <!-- <span class="member-dot"
+          [style.background]="colors[i % colors.length]"></span> -->
+        {{ user }}
+      </div>
+    </div>
+
+    <!-- WHEEL -->
+    <div class="wheel-wrapper">
+      <div class="wheel-pointer"></div>
+
+      <canvas
+        #wheelCanvas
+        width="420"
+        height="420">
+      </canvas>
+    </div>
+
+    <!-- SPIN BUTTON -->
+    <button
+      class="spin-btn"
+      [disabled]="spinning || hasSpunThisMonth || !authorizedSpinner"
+      (click)="spinWheel()">
+
+      <span *ngIf="!spinning && !hasSpunThisMonth">
+        🎡 SPIN THE WHEEL
+      </span>
+
+      <span *ngIf="spinning">
+        ✨ SPINNING...
+      </span>
+
+      <span *ngIf="hasSpunThisMonth && !spinning">
+        ✓ SPIN COMPLETED
+      </span>
+    </button>
+
+    <div class="spin-status">
+      <p>
+        Authorized Spinner:
+        <strong>{{ authorizedSpinner || 'Not assigned' }}</strong>
+      </p>
+
+      <p *ngIf="hasSpunThisMonth" class="completed-status">
+        ✓ This month's winner has already been selected.
+      </p>
+
+      <p *ngIf="!authorizedSpinner" class="warning-status">
+        Admin must assign an authorized spinner.
+      </p>
+    </div>
+
+    <!-- WINNER ANNOUNCEMENT -->
+    <div class="winner-result" *ngIf="currentWinner">
+      <div class="winner-confetti">🎊 🎉 🏆 🎉 🎊</div>
+
+      <span class="winner-label">MONTHLY LUCKY WINNER</span>
+
+      <div class="winner-trophy">🏆</div>
+
+      <h2>{{ currentWinner }}</h2>
+
+      <p>Congratulations! You are this month's lucky winner!</p>
+
+      <div class="winner-prize">
+        <span>Total Monthly Collection</span>
+        <strong>₹{{ totalCollection | number }}</strong>
+      </div>
+    </div>
+
+    <p class="error" *ngIf="message">{{ message }}</p>
+
+  </div>
+
+  <!-- WINNER HISTORY -->
+  <!-- <div class="history-section">
+
+    <div class="history-header">
+      <div>
+        <h3>🏆 Winner History</h3>
+        <p>Previous monthly lucky winners</p>
+      </div>
+
+      <button
+        class="download-btn"
+        (click)="downloadCSV()"
+        [disabled]="winners.length === 0">
+        ⬇ Download CSV
+      </button>
+    </div>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Month</th>
+            <th>Winner</th>
+            <th>Authorized Spinner</th>
+            <th>Contribution</th>
+            <th>Total Collection</th>
+            <th>Spin Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let winner of winners; let i = index">
+            <td>{{ i + 1 }}</td>
+
+            <td>
+              <span class="month-tag">{{ winner.month }}</span>
+            </td>
+
+            <td>
+              <strong class="winner-name">
+                🏆 {{ winner.name }}
+              </strong>
+            </td>
+
+            <td>{{ winner.spinner }}</td>
+
+            <td>₹{{ winner.contribution | number }}</td>
+
+            <td>
+              <strong>₹{{ winner.totalCollection | number }}</strong>
+            </td>
+
+            <td>{{ winner.date | date:'dd MMM yyyy, hh:mm a' }}</td>
+          </tr>
+
+          <tr *ngIf="winners.length === 0">
+            <td colspan="7" class="empty-row">
+              <div class="empty-icon">🎡</div>
+              <strong>No winners yet!</strong>
+              <p>The first lucky winner will appear here.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div> -->
+
+  <!-- FOOTER -->
+  <!-- <div class="page-footer">
+    <p>✨ Monthly Winner Wheel | Good luck to all members! ✨</p>
+  </div> -->
+
+</div>

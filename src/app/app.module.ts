@@ -26,6 +26,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { AiAssistantComponent } from './components/ai-assistant/ai-assistant.component';
+import { MonthlyLuckySpinComponent } from './components/monthly-lucky-spin/monthly-lucky-spin.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AiAssistantComponent } from './components/ai-assistant/ai-assistant.com
     LanguagesComponent,
     ContactComponent,
     AdminComponent,
-    AiAssistantComponent
+    AiAssistantComponent,
+    MonthlyLuckySpinComponent
   ],
   imports: [
     BrowserModule,

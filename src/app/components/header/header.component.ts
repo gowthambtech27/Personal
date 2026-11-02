@@ -24,12 +24,13 @@ URL:https://gowthambtech27.github.io/Personal/`;
 
   // Dynamic sections (can replace with Firebase later)
   sections: Section[] = [
-    { id: 'home', name: 'Home' },
-    { id: 'about', name: 'About' },
-    { id: 'experience', name: 'Experience' },
-    { id: 'skills', name: 'Skills' },
-    { id: 'projects', name: 'Projects' },
-    { id: 'contact', name: 'Contact' },
+    // { id: 'home', name: 'Home' },
+    // { id: 'about', name: 'About' },
+    // { id: 'experience', name: 'Experience' },
+    // { id: 'skills', name: 'Skills' },
+    // { id: 'projects', name: 'Projects' },
+    // { id: 'contact', name: 'Contact' },
+    { id: 'spin', name: 'Murugan Chits' },
   ];
 
   ngOnInit(): void {
