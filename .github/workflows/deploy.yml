@@ -1,7 +1,10 @@
-
       - name: Build Angular App
         id: angular-build
         shell: bash
+        env:
+          REPO_NAME: ${{ github.event.repository.name }}
+          NODE_OPTIONS: --max_old_space_size=4096
+          NO_COLOR: "1"
         run: |
           set +e
 
@@ -12,11 +15,21 @@
           npm --version
 
           echo "===== Angular Build Started ====="
-          npm run build -- --configuration=production --base-href "/${{ github.event.repository.name }}/" 2>&1 | tee angular-build.log
+          npm run build -- --configuration=production --base-href "/${REPO_NAME}/" 2>&1 | tee angular-build.log
 
           BUILD_STATUS=${PIPESTATUS[0]}
 
           echo "===== Angular Build Exit Code: $BUILD_STATUS ====="
+
+          if [ "$BUILD_STATUS" -ne 0 ]; then
+            echo "===== Key Error Lines ====="
+            grep -nE "ERROR|Error:|TS[0-9]+|NG[0-9]+|budget|heap|Cannot find|not found" angular-build.log | head -30
+
+            # Surface the first error as an annotation on the run summary
+            FIRST_ERROR=$(grep -m1 -E "ERROR|Error:|TS[0-9]+|NG[0-9]+|budget|heap" angular-build.log)
+            echo "::error title=Angular build failed::${FIRST_ERROR:-See angular-build.log artifact}"
+          fi
+
           exit "$BUILD_STATUS"
 
       - name: Upload Angular Build Log
@@ -25,4 +38,5 @@
         with:
           name: angular-build-log
           path: angular-build.log
+          retention-days: 7
           if-no-files-found: ignore
